@@ -27,6 +27,16 @@
 
 int _tmain(int argc, LPTSTR argv[])
 {
+	TCHAR szBefore[5] = { TEXT('B'), TEXT('B'), TEXT('B'), TEXT('B'), '\0' };
+	TCHAR szBuffer[10] =
+	{
+	TEXT('-'), TEXT('-'), TEXT('-'), TEXT('-'), TEXT('-'),
+	TEXT('-'), TEXT('-'), TEXT('-'), TEXT('-'), '\0'
+	};
+	TCHAR szAfter[5] = { TEXT('A'), TEXT('A'), TEXT('A'), TEXT('A'), '\0' };
+	errno_t result = _tcscpy_s(szBuffer, _countof(szBuffer), TEXT("0123456789"));
+
+	/*
 	char str[] = "- This, a sample string.";
 	char* pch;
 	printf("Splitting string \"%s\" into tokens:\n", str);
@@ -38,6 +48,7 @@ int _tmain(int argc, LPTSTR argv[])
 	}
 	printf("%s\n", str);
 	std::cout << argc;
+	*/
 	return 0;
 	/*
 	HANDLE hInFile;

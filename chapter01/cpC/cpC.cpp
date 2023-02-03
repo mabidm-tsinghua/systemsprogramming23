@@ -9,7 +9,7 @@
 
 
 
-#define BUF_SIZE 256
+#define BUF_SIZE 512
 #define ctrl_z 26
 int main (int argc, char *argv [])
 {
@@ -36,16 +36,21 @@ int main (int argc, char *argv [])
 		fclose(inFile);
 		return 3;
 	}
-	fgets(rec,BUFSIZ,inFile);
+	//fgets(rec,BUFSIZ,inFile);
 
-    fwrite (rec, 1, strlen(rec), outFile);
+    //fwrite (rec, 1, strlen(rec), outFile);
 	/*char r[5];
 	fread (r, 1, 5, inFile);
     printf("%s",r);
 	*/
 
+	/*void perror ( const char * str );
+		Print error message
+		Interprets the value of errno as an error message, and prints it to stderr 
+		(the standard error output stream, usually the console), optionally preceding 
+		it with the custom message specified in str.*/
 	/* Process the input file a record at a time. */
-	/*
+	
 	while ((bytesIn = fread (rec, 1, BUF_SIZE, inFile)) > 0) { //read BUF_SIZE elements, each with size of 1; ret total elements read
 		bytesOut = fwrite (rec, 1, bytesIn, outFile);
 		if (bytesOut != bytesIn) {
@@ -56,7 +61,7 @@ int main (int argc, char *argv [])
 		}
 	}
 	
-	*/
+	
 
 	fclose (inFile);
 	fclose (outFile);
