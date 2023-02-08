@@ -14,7 +14,7 @@ int _tmain (int argc, TCHAR *argv []) // Notice: int _tmain (int argc, LPTSTR ar
 {
 	HANDLE hIn, hOut;
 	DWORD nIn, nOut;
-	CHAR buffer [BUF_SIZE];
+	BYTE buffer [BUF_SIZE];
 	const int i =10;
 	const int *const pi = &i;
 	const int *const *ppi = &pi;
@@ -56,7 +56,7 @@ int _tmain (int argc, TCHAR *argv []) // Notice: int _tmain (int argc, LPTSTR ar
 	}
 	//to create a hidden file we can pass FILE_ATTRIBUTE_HIDDEN
 	hOut = CreateFile (argv[2] , GENERIC_WRITE, 0, NULL,
-			CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL); //to open a hidden file we must pass FILE_ATTRIBUTE_HIDDEN otherwise this fun fails
+			CREATE_ALWAYS, FILE_ATTRIBUTE_HIDDEN, NULL); //to open a hidden file we must pass FILE_ATTRIBUTE_HIDDEN otherwise this fun fails
 	if (hOut == INVALID_HANDLE_VALUE) {
 		fprintf (stderr, "Cannot open output file. Error: 0X%x\n", GetLastError ());
 		CloseHandle(hIn);

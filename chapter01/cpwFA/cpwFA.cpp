@@ -16,7 +16,7 @@ int _tmain (int argc, LPTSTR argv [])
 {
 	HANDLE hIn, hOut;
 	DWORD nIn, nOut;
-	CHAR buffer [BUF_SIZE];
+	BYTE buffer [BUF_SIZE];
 	if (argc != 3) {
 		fprintf (stderr, "Usage: cp file1 file2\n");
 		return 1;

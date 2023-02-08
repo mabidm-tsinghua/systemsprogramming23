@@ -2,6 +2,8 @@
 
 /* Job management exit code for killed jobs. */
 
+#pragma once
+
 #define JM_EXIT_CODE 0x1000
 #define MAX_JOBS_ALLOWED 10000
 typedef struct _JM_JOB

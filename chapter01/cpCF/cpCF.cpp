@@ -17,6 +17,7 @@ int _tmain (int argc, LPTSTR argv []) // Notice: _tmain
 			[in] LPCSTR lpNewFileName,
 			[in] BOOL   bFailIfExists
 	);
+	If the function succeeds, the return value is nonzero.
 	*/
 	if (!CopyFile (argv[1], argv[2], FALSE)) { //FALSE means overwrite existing file
 		                                       //TRUE means this fun fails if lpNewFileName exists; hence making this if true  

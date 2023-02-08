@@ -7,6 +7,12 @@
 /* Chapter 1. Basic cp file copy program. C library Implementation. */
 /* cpC file1 file2: Copy file1 to file2. */
 
+/*
+Windows file processing features not available with the C library
+include file locking, memory mapping (required for memory sharing and
+performance), asynchronous I/O, random access to very long files (more than 4GB
+in length), and interprocess communication.
+*/
 
 
 #define BUF_SIZE 512

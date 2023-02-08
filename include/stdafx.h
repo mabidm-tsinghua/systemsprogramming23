@@ -17,8 +17,8 @@
 #include <wchar.h>
 #include <malloc.h>        // For alloca
 #include <TlHelp32.h>
-#include <StrSafe.h>
 #include "support.h"
+#include <StrSafe.h>
 
 
 // TODO: reference additional headers your program requires here
