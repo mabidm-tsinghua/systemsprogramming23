@@ -6,6 +6,8 @@
 		3.  SEQUENTIAL SCAN */
 /* cp file1 file2: Copy file1 to file2. */
 
+//Here we are using FILE_FLAG_SEQUENTIAL_SCAN: hints to the Windows cache manager
+
 #include "stdafx.h"
 #define BUF_SIZE 8192
 

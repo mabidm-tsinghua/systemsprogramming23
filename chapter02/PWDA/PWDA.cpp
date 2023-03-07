@@ -35,16 +35,30 @@ int _tmain (int argc, LPTSTR argv [])
 	_ftprintf (stderr, _T("%s\n"), pwdBuffer);
 
 	SetCurrentDirectory(TEXT("D:\\github_rep\\SystemsProgramming\\chapter02\\Debug"));
-	
+	/*When full pathnames are not supplied, the various Windows functions look for 
+	files and directories in the current directory of the current drive. 
+	For example, if a thread in a process calls CreateFile to open a file 
+	(without specifying a full pathname), the system looks for the file in 
+	the current drive and directory.
+	The system keeps track of a process' current drive and directory internally. 
+	Because this information is maintained on a per-process basis, a thread in the 
+	process that changes the current drive or directory changes this information for 
+	all the threads in the process.*/
 	HANDLE hInFile = CreateFile(TEXT("d:abc.txt"), GENERIC_READ,
 		FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 	if (hInFile == INVALID_HANDLE_VALUE) {
 		 ReportError(_T("\nCat Error1: File does not exist."), 0, FALSE);
 	}
-
+	/*
+	The system keeps track of the process' current drive and directory, 
+	but it does not keep track of the current directory for every drive. 
+	However, there is some operating system support for handling current 
+	directories for multiple drives. This support is offered via the process' 
+	environment strings. 
+	*/
 	SetEnvironmentVariable(TEXT("=c:"),TEXT("c:\\working_directory"));//=c:=c:\\working_directory
 
-	hInFile = CreateFile(TEXT("c:abc.txt"), GENERIC_READ,
+	hInFile = CreateFile(TEXT("c:abc.txt"), GENERIC_READ, //search abc.txt in c:\\working_directory as env variable exist
 		FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 	if (hInFile == INVALID_HANDLE_VALUE) {
 		ReportError(_T("\nCat Error2: File does not exist."), 0, TRUE);

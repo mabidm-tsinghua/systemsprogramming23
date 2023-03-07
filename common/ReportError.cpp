@@ -14,9 +14,18 @@ VOID ReportError (LPCTSTR userMessage, DWORD exitCode, BOOL printErrorMessage)
 	LPTSTR lpvSysMsg;
 	_ftprintf (stderr, _T("%s\n"), userMessage);
 	if (printErrorMessage) {
-		eMsgLen = FormatMessage (FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM,
-				NULL, errNum, MAKELANGID (LANG_NEUTRAL, SUBLANG_DEFAULT),
-				(LPTSTR) &lpvSysMsg, 0, NULL);
+		/*ret val of FormatMessage: If the function succeeds, the return value is the number of
+			TCHARs stored in the outputbuffer, excluding the terminating null character.
+			If the function fails, the return value is zero*/
+		eMsgLen = FormatMessage (
+			FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM, //allocate buffer for msg and search system msg resource to find msg defintion based on dwMessageId and dwLanguageId
+				NULL, //no src msg buffer
+			errNum,  //error no of last error
+			MAKELANGID (LANG_NEUTRAL, SUBLANG_DEFAULT),//msg lang
+				(LPTSTR) &lpvSysMsg,//this is where allocated buffer pointer is ret
+			0, 
+			NULL
+		);
 		if (eMsgLen > 0)
 		{
 			_ftprintf (stderr, _T("%s\n"), lpvSysMsg);

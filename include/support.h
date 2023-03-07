@@ -14,7 +14,7 @@
 #define TYPE_DIR 2
 #define TYPE_DOT 3
 
-#define MAX_OPTIONS 20	/* Max # command line options */
+#define MAX_OPTIONS 5	/* Max # command line options */
 #define MAX_ARG 1000	/* Max # of command line arguments */
 #define MAX_COMMAND_LINE MAX_PATH+50 /* Max size of a command line */
 #define MAX_PATH_LONG 32767  /* Very long path names with \\?\ prefix. */

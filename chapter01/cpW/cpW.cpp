@@ -19,7 +19,7 @@ int _tmain (int argc, TCHAR *argv []) // Notice: int _tmain (int argc, LPTSTR ar
 	const int *const pi = &i;
 	const int *const *ppi = &pi;
 	//*pi = 123;
-
+	int ch = getchar();
 	if (argc != 3) {
 		fprintf (stderr, "Usage: cp file1 file2\n");
 		return 1;//
@@ -32,7 +32,7 @@ int _tmain (int argc, TCHAR *argv []) // Notice: int _tmain (int argc, LPTSTR ar
   [in, optional] LPSECURITY_ATTRIBUTES lpSecurityAttributes,
   [in]           DWORD                 dwCreationDisposition,
   [in]           DWORD                 dwFlagsAndAttributes,
-  [in, optional] HANDLE                hTemplateFile
+  [in, optional] HANDLE                hTemplateFile //parameter can be used to set the attributes of a new file to be the same as those of an existing file.Ref:0. Windows System Programming (4th Edition) by johnson
 );*/
 	/*The SECURITY_ATTRIBUTES structure contains the security descriptor for an object and 
 	specifies whether the handle retrieved by specifying this structure is inheritable.*/
@@ -55,6 +55,7 @@ int _tmain (int argc, TCHAR *argv []) // Notice: int _tmain (int argc, LPTSTR ar
 		return 2;
 	}
 	//to create a hidden file we can pass FILE_ATTRIBUTE_HIDDEN
+	//FILE_FLAG_DELETE_ON_CLOSE
 	hOut = CreateFile (argv[2] , GENERIC_WRITE, 0, NULL,
 			CREATE_ALWAYS, FILE_ATTRIBUTE_HIDDEN, NULL); //to open a hidden file we must pass FILE_ATTRIBUTE_HIDDEN otherwise this fun fails
 	if (hOut == INVALID_HANDLE_VALUE) {

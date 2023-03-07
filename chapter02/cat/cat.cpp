@@ -44,7 +44,7 @@ int _tmain (int argc, LPCTSTR argv [])
 			if (!dashS) ReportError (_T ("\nCat Error: File does not exist."), 0, TRUE);
 		} else {
 			CatFile (hInFile, hStdOut);
-			if (GetLastError() != 0 && !dashS) {
+			if (GetLastError() != 0 && !dashS) { //0 means success
 				ReportError (_T ("\nCat Error: Could not process file completely."), 0, TRUE);
 			}
 			CloseHandle (hInFile);
