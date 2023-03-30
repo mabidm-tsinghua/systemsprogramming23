@@ -97,7 +97,7 @@ int _tmain(int argc, LPTSTR argv[])
 			//return 0; //never put return in finally
 			//ReportException (_T("__finally exception"), 1);
 		}
-	} /* End of main file processing loop and try block. */
+	} 
 
 	/* This exception handler applies to the loop body */
 	//__except (EXCEPTION_EXECUTE_HANDLER) { //any unhandled exception from loop body no matter where it came from (__try or __finally or code not within __try/ __finally)
@@ -120,3 +120,9 @@ LONG WINAPI Filter(LPEXCEPTION_POINTERS pExp) {
 	return EXCEPTION_EXECUTE_HANDLER;
 	
 }
+
+/*
+ if Filter(LPEXCEPTION_POINTERS pExp) returns:
+	EXCEPTION_EXECUTE_HANDLER: The process simply terminates without any notification to the user. 
+								Note that a global unwind is triggered, so the finally blocks are executed.
+*/

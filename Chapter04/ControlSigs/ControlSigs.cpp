@@ -25,31 +25,37 @@ int _tmain(int argc, LPTSTR argv[])
 /* Beep periodically until signaled to stop. */
 {
 	
+	//// since ENABLE_PROCESSED_INPUT is not present, ctrl-c is not processed by os/application 
+	//and placed in input buffer. However, ctrl-break is still working. 
+	//If we uncomment following code then there is no point of having  handler for ctrl+C
 	/*
 	HANDLE hIn;
 	hIn = CreateFile (_T("CONIN$"), GENERIC_READ | GENERIC_WRITE, 0,
 			NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-	SetConsoleMode (hIn, ENABLE_LINE_INPUT | ENABLE_ECHO_INPUT  );// since ENABLE_PROCESSED_INPUT is not present, ctrl-c is ignored and part of buffer. However, ctrl-break is still working.
-		*/
+	SetConsoleMode (hIn, ENABLE_LINE_INPUT | ENABLE_ECHO_INPUT  );
+	*/	
 
-	 //ignore ctrl-c
-	if (!SetConsoleCtrlHandler(NULL, TRUE)) //TRUE means add handler
+	 //If we want calling process to ingore ctrl-c;
+	//ctrl+c will not work until we restore ctrl+c using SetConsoleCtrlHandler(NULL, FALSE)
+	if (!SetConsoleCtrlHandler(NULL, TRUE)) 
 		ReportError(_T("Error setting event handler"), 1, TRUE);
 		
 		
 	/* Add an event handler. */
 	//more than one handler can be added.
-	if (!SetConsoleCtrlHandler(Handler, TRUE))
+	//default OS handler kills the app
+	if (!SetConsoleCtrlHandler(Handler, TRUE))//TRUE means add handler
 		ReportError(_T("Error setting event handler"), 1, TRUE);
 
 	while (!exitFlag) { /* This flag is detected right after a beep, before a handler exits */
+		//Suspends the execution of the current thread until the time-out interval elapses.
 		Sleep(4750); 
 		/* Beep every 5 seconds (4750+250 = 5000ms=5s); allowing 250 ms of beep time. */
 		Beep(1000 /* Frequency */, 250 /* Duration */);
 		
-		 //process receives ctrl-c
+		 //restores normal processing of CTRL + C input
 		if (!SetConsoleCtrlHandler(NULL, FALSE))
-		ReportError(_T("Error setting event handler"), 1, TRUE);
+			ReportError(_T("Error setting event handler"), 1, TRUE);
 		_tprintf(_T("Inside\n"));
 	
 	}

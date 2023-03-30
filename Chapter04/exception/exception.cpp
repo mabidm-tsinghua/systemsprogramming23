@@ -18,35 +18,35 @@ int _tmain (int argc, LPTSTR argv [])
 		_tscanf_s (_T("%d"), &i);
 		__try { /* Try-Except block. */
 			switch (i) {
-			case 1: /* Memory reference. */
-				*pNull = ix  ;
-				*pNull = 5;
-				break;
-			case 2: /* Integer arithmetic. */
-				ix = ix / iy;
-				break;
-			case 3: /* User generated exception. */
-				ReportException (_T("Raising user exception.\n"), 1);
-				break;
-			case 4: /* Use the return statement to terminate. */
-				return 1;
-			default: done = TRUE;
+				case 1: /* Memory reference. */
+					*pNull = ix  ;
+					*pNull = 5;
+					break;
+				case 2: /* Integer arithmetic. */
+					ix = ix / iy;
+					break;
+				case 3: /* User generated exception. */
+					ReportException (_T("Raising user exception.\n"), 1);
+					break;
+				case 4: /* Use the return statement to terminate. */
+					return 1;
+				default: done = TRUE;
 			}
 		} /* End of inner __try. */
-		  //GetExceptionInformation() can be called only from within the filter expression of an exception handler.
+		  //GetExceptionInformation() and GetExceptionCode () can only be called only from within the filter expression of an exception handler.
 		__except (Filter (GetExceptionInformation (), &eCategory)){
 			
 			switch (eCategory) {
-			case 0:	_tprintf (_T("Unknown exception.\n"));
-				break;
-			case 1:	_tprintf (_T("Memory ref exception.\n"));
-				break;
-			case 2:	_tprintf (_T("Integer arithmetic exception.\n"));
-				break;
-			case 10: _tprintf (_T("User generated exception.\n"));
-				break; 
-			default: _tprintf (_T("Unknown exception.\n"));
-				break;
+				case 0:	_tprintf (_T("Unknown exception.\n"));
+					break;
+				case 1:	_tprintf (_T("Memory ref exception.\n"));
+					break;
+				case 2:	_tprintf (_T("Integer arithmetic exception.\n"));
+					break;
+				case 10: _tprintf (_T("User generated exception.\n"));
+					break; 
+				default: _tprintf (_T("Unknown exception.\n"));
+					break;
 			}
 			_tprintf (_T("End of handler.\n"));
 
@@ -80,7 +80,7 @@ static DWORD Filter (LPEXCEPTION_POINTERS pExP, LPDWORD eCategory)
 		case EXCEPTION_ACCESS_VIOLATION:
 				/* Determine whether it was a read, write, or execute
 					and give the virtual address. */
-			//0 means read, 1 means write, 8 means user-mode dataexecution prevention (DEP) violation.
+			//0 means read, 1 means write, 8 means user-mode data execution prevention (DEP) violation.
 			readWrite =
 				(DWORD)(pExP->ExceptionRecord->ExceptionInformation [0]);
 			//virtual address that caused the exception

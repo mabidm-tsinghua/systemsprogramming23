@@ -3,7 +3,7 @@
 /* 
 	Convert one or more files, changing all letters to upper case
 	The output file will be the same name as the input file, except
-	a "UC_" prefix will be attached to the file name.
+	a "UC_" suffix will be attached to the file name.
 
 /* This program illustrates:
 	1.	Exception handling to recover from a run-time exceptions
@@ -93,9 +93,7 @@ int _tmain (int argc, LPTSTR argv [])
 			_tprintf (_T("__finally cleaning reseources for this file %s\n"), argv[iFile]);
 			//ReportException (_T("__finally exception"), 1);
 		}
-	} /* End of main file processing loop and try block. */
-	
-	/* This exception handler applies to the loop body */
+	} /* This exception handler applies to the loop body */
 	__except (EXCEPTION_EXECUTE_HANDLER) { //any unhandled exception from loop body no matter where it came from (__try or __finally or code not within __try/ __finally)
 		_tprintf (_T("Error occured processing file %s\n"), argv[iFile]);
 		DeleteFile (outFileName); //delete the file
